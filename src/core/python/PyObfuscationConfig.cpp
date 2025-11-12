@@ -453,6 +453,42 @@ FunctionOutlineOpt PyObfuscationConfig::functionOutline(llvm::Module *M,
   return FunctionOutlineSkip();
 }
 
+IndirectGlobalVariableOpt PyObfuscationConfig::indirectGlobalVariable(llvm::Module *M,
+                                                                      llvm::GlobalVariable *G) {
+  py::gil_scoped_acquire gil;
+  py::function override = py::get_override(
+      static_cast<const ObfuscationConfig *>(this), "indirect_global_variable");
+  if (override) {
+    try {
+      py::object out = override(M, G);
+      if (out.is_none())
+        return IndirectGlobalVariableSkip();
+
+      if (py::isinstance<py::bool_>(out))
+        throw py::value_error("indirect_global_variable: boolean value not accepted.");
+
+      if (py::isinstance<py::int_>(out)) {
+        unsigned Probability = out.cast<py::int_>();
+        if (Probability < 0 || Probability > 100)
+          throw py::value_error(
+              "indirect_global_variable: probability must be within [0, 100].");
+        return IndirectGlobalVariableWithProbability(Probability);
+      }
+
+      if (py::detail::cast_is_temporary_value_reference<
+              IndirectGlobalVariableOpt>::value) {
+        static pybind11::detail::override_caster_t<IndirectGlobalVariableOpt> caster;
+        return pybind11::detail::cast_ref<IndirectGlobalVariableOpt>(std::move(out),
+                                                                     caster);
+      }
+      return pybind11::detail::cast_safe<IndirectGlobalVariableOpt>(std::move(out));
+    } catch (const std::exception &Exc) {
+      fatalError("Error in 'indirect_global_variable': '"s + Exc.what() + "'");
+    }
+  }
+  return IndirectGlobalVariableSkip();
+}
+
 bool PyObfuscationConfig::defaultConfig(
     llvm::Module *M, llvm::Function *F,
     const std::vector<std::string> &ModuleExcludes,
