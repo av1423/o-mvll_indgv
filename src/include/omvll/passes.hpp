@@ -15,7 +15,7 @@
 #include "omvll/passes/function-outline/FunctionOutline.hpp"
 #include "omvll/passes/indirect-branch/IndirectBranch.hpp"
 #include "omvll/passes/indirect-call/IndirectCall.hpp"
-#include "omvll/passes/indirect-gv/IndirectGlobalVariable.cpp"
+#include "omvll/passes/indirect-gv/IndirectGlobalVariable.hpp"
 #include "omvll/passes/logger-bind/LoggerBind.hpp"
 #include "omvll/passes/objc-cleaner/ObjCleaner.hpp"
 #include "omvll/passes/opaque-constants/OpaqueConstants.hpp"
