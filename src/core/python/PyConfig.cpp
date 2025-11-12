@@ -358,6 +358,15 @@ void OMVLLCtor(py::module_ &m) {
          )delim",
            "module"_a, "function"_a)
 
+      .def("indirect_global_variable", &ObfuscationConfig::indirectGlobalVariable,
+           R"delim(
+           The default user-callback to convert direct accesses to a global
+           variable into indirect ones by splitting the global's address/value
+           into two additive shares.
+         )delim",
+           "module"_a, "global"_a)
+           
+
       .def("report_diff", &ObfuscationConfig::reportDiff,
            R"delim(
          User-callback to monitor IR-level changes from individual obfuscation passes.
