@@ -138,6 +138,7 @@ PassPluginLibraryInfo getOMVLLPluginInfo() {
 #endif
                     MPM.addPass(omvll::IndirectCall());
                     MPM.addPass(omvll::IndirectBranch());
+                    MPM.addPass(omvll::IndirectGlobalVariable());
                     MPM.addPass(omvll::Cleaning());
                     Once = true;
                     return true;
