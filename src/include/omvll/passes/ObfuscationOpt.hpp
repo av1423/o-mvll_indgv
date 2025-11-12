@@ -13,6 +13,7 @@
 #include "omvll/passes/function-outline/FunctionOutlineOpt.hpp"
 #include "omvll/passes/indirect-branch/IndirectBranchOpt.hpp"
 #include "omvll/passes/indirect-call/IndirectCallOpt.hpp"
+#include "omvll/passes/indirect-gv/IndirectGlobalVariable.hpp"
 #include "omvll/passes/opaque-constants/OpaqueConstantsOpt.hpp"
 #include "omvll/passes/opaque-field-access/OpaqueFieldAccessOpt.hpp"
 #include "omvll/passes/string-encoding/StringEncodingOpt.hpp"
