@@ -25,6 +25,7 @@ void initDefaultConfig() {
       IndirectCall::name().str(),
       BasicBlockDuplicate::name().str(),
       FunctionOutline::name().str(),
+      IndirectGlobalVariable::name().str(),
 
       // Last pass.
       Cleaning::name().str(),
