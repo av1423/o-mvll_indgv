@@ -215,7 +215,7 @@ py::module_ &py_init_obf_opt(py::module_ &m) {
     .def(py::init<unsigned>(), "probability"_a);
 
   // IndirectGlobalVariable options
-py::class_<IndirectGlobalVariableSkip>(m, "IndirectGlobalVariableSkip",
+  py::class_<IndirectGlobalVariableSkip>(m, "IndirectGlobalVariableSkip",
   R"delim(
   Option for the :meth:`omvll.ObfuscationConfig.indirect_global_variable` protection.
 
@@ -223,7 +223,7 @@ py::class_<IndirectGlobalVariableSkip>(m, "IndirectGlobalVariableSkip",
   )delim")
   .def(py::init<>());
 
-py::class_<IndirectGlobalVariableWithProbability>(m, "IndirectGlobalVariableWithProbability",
+  py::class_<IndirectGlobalVariableWithProbability>(m, "IndirectGlobalVariableWithProbability",
   R"delim(
   Option for the :meth:`omvll.ObfuscationConfig.indirect_global_variable` protection.
 
