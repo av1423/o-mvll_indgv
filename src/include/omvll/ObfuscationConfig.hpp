@@ -62,6 +62,9 @@ struct ObfuscationConfig {
   virtual FunctionOutlineOpt functionOutline(llvm::Module *M,
                                              llvm::Function *F) = 0;
 
+  virtual IndirectGlobalVariable indirectGlobalVariable(llvm::Module *M,
+                                                        llvm::GlobalVariable *G) = 0;
+
   virtual bool defaultConfig(llvm::Module *M, llvm::Function *F,
                              const std::vector<std::string> &ModuleExcludes,
                              const std::vector<std::string> &FunctionExcludes,
