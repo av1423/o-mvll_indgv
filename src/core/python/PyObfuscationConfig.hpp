@@ -48,7 +48,7 @@ class PyObfuscationConfig : public ObfuscationConfig {
                                      llvm::Function *F) override;
 
   IndirectGlobalVariableOpt indirectGlobalVariable(llvm::Module *M,
-                                                   llvm::GlobalVariable *G);
+                                                   llvm::GlobalVariable *G) override;
 
   bool defaultConfig(llvm::Module *M, llvm::Function *F,
                      const std::vector<std::string> &ModuleExcludes = {},
