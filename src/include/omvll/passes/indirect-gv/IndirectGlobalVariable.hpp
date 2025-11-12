@@ -5,22 +5,20 @@
 // details.
 //
 
-#include "llvm/IR/PassManager.h"
-#include <memory>
+#include <variant>
 
 namespace omvll {
 
-/// Pass that replaces direct global variable accesses with indirect accesses via a page table.
-struct IndirectGlobalVariable : llvm::PassInfoMixin<IndirectGlobalVariable> {
-  /// Run the pass on the given module.
-  llvm::PreservedAnalyses run(llvm::Module &M, llvm::ModuleAnalysisManager &MAM);
+struct IndirectGlobalVariableSkip {};
 
-private:
-  /// Random number generator used for assigning keys to global variables
-  std::unique_ptr<llvm::RandomNumberGenerator> RNG;
-
-  // Optional: helper function to lower constant expressions in a function
-  void lowerConstantExpr(llvm::Function &F);
+struct IndirectGlobalVariableWithProbability {
+  IndirectGlobalVariableWithProbability(unsigned Probability = 0)
+      : Probability(Probability) {}
+  operator bool() const { return Probability > 0; }
+  unsigned Probability;
 };
 
-} // namespace omvll
+using IndirectGlobalVariableOpt =
+    std::variant<IndirectGlobalVariableSkip, IndirectGlobalVariableWithProbability>;
+
+} // end namespace omvll
